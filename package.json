@@ -1,0 +1,42 @@
+{
+  "private": true,
+  "name": "maxdome-chatbot",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "http://github.com/dragonprojects/maxdome-chatbot",
+  "author": {
+    "name": "Sharaal",
+    "email": "developer@dragonprojects.de",
+    "url": "http://dragonprojects.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dragonprojects/maxdome-chatbot.git"
+  },
+  "readmeFilename": "README.md",
+  "scripts": {
+    "build": "babel src -d dest",
+    "develop": "nodemon src/cli.js --exec babel-node",
+    "lint": "eslint src",
+    "postinstall": "npm run build"
+  },
+  "dependencies": {
+    "babel-cli": "^6.7.5",
+    "babel-plugin-transform-async-to-generator": "^6.8.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.16.0",
+    "babel-plugin-transform-strict-mode": "^6.11.3",
+    "botbuilder": "^3.2.3",
+    "commander": "^2.9.0",
+    "dotenv": "^2.0.0",
+    "restify": "^4.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.5.0",
+    "eslint-config-airbnb": "^11.1.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-react": "^6.3.0",
+    "eslint-plugin-import": "^1.16.0",
+    "nodemon": "^1.10.2"
+  }
+}
