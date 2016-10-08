@@ -11,12 +11,10 @@ export default ({ heimdall }) => async ({ args, reply, translate }) => {
   const assets = await heimdall.getAssets(query);
   if (assets.length) {
     const hostname = process.env.MXD_SEARCH_HOSTNAME || 'store.maxdome.de';
-    const attachments = assets.map(asset => {
-      return {
-        title: reply.link(`https://${hostname}/${asset.id}`, asset.title),
-        text: asset.description
-      };
-    });
+    const attachments = assets.map(asset => ({
+      title: reply.link(`https://${hostname}/${asset.id}`, asset.title),
+      text: asset.description,
+    }));
     reply.send(
       reply.link(`https://${hostname}/suche?search=${encodeURIComponent(args)}`, translate.text('Show all results...')),
       attachments

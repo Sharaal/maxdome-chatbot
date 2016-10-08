@@ -19,9 +19,13 @@ const botbuilderConnector = program.botbuilderConnector;
 if (platforms[platform]) {
   const heimdall = new Heimdall({
     apikey: process.env.HEIMDALL_APIKEY,
-    appid: process.env.HEIMDALL_APPID
+    appid: process.env.HEIMDALL_APPID,
   });
-  platforms[platform]({ botbuilderConnector, generalCommands: generalCommands({ heimdall }), generalModules });
+  platforms[platform]({
+    botbuilderConnector,
+    generalCommands: generalCommands({ heimdall }),
+    generalModules,
+  });
 } else {
   throw new Error(`Unknown platform '${platform}', available platforms: ${Object.keys(platforms).join(', ')}`);
 }
