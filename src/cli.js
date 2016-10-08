@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import { Heimdall } from 'mxd-heimdall';
 import program from 'commander';
 
 import generalCommands from './commands';
@@ -16,7 +17,11 @@ const platform = program.platform;
 const botbuilderConnector = program.botbuilderConnector;
 
 if (platforms[platform]) {
-  platforms[platform]({ botbuilderConnector, generalCommands, generalModules });
+  const heimdall = new Heimdall({
+    apikey: process.env.HEIMDALL_APIKEY,
+    appid: process.env.HEIMDALL_APPID
+  });
+  platforms[platform]({ botbuilderConnector, generalCommands: generalCommands({ heimdall }), generalModules });
 } else {
   throw new Error(`Unknown platform '${platform}', available platforms: ${Object.keys(platforms).join(', ')}`);
 }

@@ -1,4 +1,6 @@
 {
   "Error: %s": "Fehler: %s",
+  "No results found for '%s'": "Keine Ergebnisse gefunden für '%s'",
+  "Show all results...": "Zeige alle Ergebnisse...",
   "Unknown command '%s'": "Unbekanntes Kommando '%s'"
 }
