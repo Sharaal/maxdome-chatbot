@@ -1,4 +1,4 @@
-import botbuilder from './botbuilder';
+import botbuilder from './botbuilder/botbuilder';
 
 export default {
   botbuilder,
