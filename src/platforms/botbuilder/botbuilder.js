@@ -35,7 +35,7 @@ export default ({ botbuilderConnector, generalCommands, generalModules }) => {
         ));
       }
     } catch (e) {
-      session.send(translate.text('Error: %s', e.message));
+      reply.send(translate.text('Error: %s', e.message));
     }
   });
 };

@@ -1,4 +1,4 @@
-import de from './de.json';
+import de from './de';
 
 export default ({
   de,
