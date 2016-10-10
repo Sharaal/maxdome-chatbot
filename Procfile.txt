@@ -1,2 +1,2 @@
-web: npm start -- -p botbuilder -b chat
-irc: npm start -- -p irc
+web: npm start
+worker: npm start

@@ -3,15 +3,15 @@ import builder from 'botbuilder';
 import connectors from './connectors';
 import consoleModules from './modules';
 
-export default ({ botbuilderConnector, generalCommands, generalModules }) => {
+export default ({ generalCommands, generalModules, platform }) => {
   const commands = generalCommands;
   const modules = Object.assign({}, generalModules, consoleModules);
 
   let connector;
-  if (connectors[botbuilderConnector]) {
-    connector = connectors[botbuilderConnector]();
+  if (connectors[platform.connector]) {
+    connector = connectors[platform.connector]();
   } else {
-    throw new Error(`Unknown botbuilderConnector '${botbuilderConnector}', available botbuilderConnectors: ${Object.keys(connectors).join(', ')}`);
+    throw new Error(`Unknown connector '${platform.connector}', available connectors: ${Object.keys(connectors).join(', ')}`);
   }
 
   const bot = new builder.UniversalBot(connector);
