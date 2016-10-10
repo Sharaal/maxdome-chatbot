@@ -2,7 +2,7 @@ export default ({ heimdall, sessions }) => async ({ args, loggedin, reply, trans
   const account = await loggedin();
   const [userId, phrase] = args.split(' ');
   const data = await heimdall.post('auth/login', {
-    body: { autoLogin: true, phrase, userId },
+    body: { userId, phrase, autoLogin: true },
   });
   const session = {
     account,
