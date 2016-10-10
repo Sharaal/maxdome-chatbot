@@ -5,6 +5,7 @@ import redis from 'redis';
 
 import generalCommands from './commands';
 import generalModules from './modules';
+import generalStorages from './storages';
 import platforms from './platforms';
 
 dotenv.config({ silent: true });
@@ -27,6 +28,7 @@ if (platforms[platform]) {
     botbuilderConnector,
     generalCommands: generalCommands({ heimdall }),
     generalModules,
+    generalStorages: generalStorages({ redisClient }),
     redisClient,
   });
 } else {

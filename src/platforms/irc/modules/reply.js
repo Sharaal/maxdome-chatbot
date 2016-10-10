@@ -1,4 +1,4 @@
-export default ({ client, from, replyto }) => ({
+export default ({ ircClient, from, replyto }) => ({
   link: (url, label) => {
     if (label) {
       return `${label} (${url})`;
@@ -19,6 +19,6 @@ export default ({ client, from, replyto }) => ({
     if (replyto !== from) {
       line = `${from}: ${line}`;
     }
-    client.say(replyto, line);
+    ircClient.say(replyto, line);
   },
 });

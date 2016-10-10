@@ -1,15 +1,15 @@
 import irc from 'irc';
 
-import _channelsStorage from './storages/channels';
 import ircCommands from './commands';
 import ircModules from './modules';
+import ircStorages from './storages';
 
-export default ({ generalCommands, generalModules, redisClient }) => {
-  const channelsStorage = _channelsStorage({ client: redisClient });
+export default ({ generalCommands, generalModules, generalStorages, redisClient }) => {
+  const storages = Object.assign({}, generalStorages, ircStorages({ redisClient }));
   const commands = Object.assign(
     {},
     generalCommands,
-    ircCommands({ channelsStorage })
+    ircCommands({ channels: storages.channels })
   );
   const modules = Object.assign({}, generalModules, ircModules);
 
@@ -25,7 +25,7 @@ export default ({ generalCommands, generalModules, redisClient }) => {
   const ircClient = new irc.Client(process.env.IRC_HOST, process.env.IRC_NICK, options);
 
   ircClient.addListener('registered', async () => {
-    const channels = await channelsStorage.values();
+    const channels = await storages.channels.values();
     for (const channel of channels) {
       ircClient.join(channel);
     }
@@ -39,22 +39,22 @@ export default ({ generalCommands, generalModules, redisClient }) => {
   });
 
   ircClient.addListener('message', async (from, to, message) => {
-    const replyto = modules.replyto({ client: ircClient, from, to });
+    const replyto = modules.replyto({ ircClient, from, to });
     const { name, args } = modules.command({ from, message, replyto });
     if (!name) {
       return;
     }
     const translate = modules.translate({ language: 'de' });
-    const loggedin = modules.loggedin({ client: ircClient, from, translate });
+    const loggedin = modules.loggedin({ ircClient, from, translate });
     const admin = modules.admin({ loggedin, translate });
-    const reply = modules.reply({ client: ircClient, from, replyto });
+    const reply = modules.reply({ ircClient, from, replyto });
 
     try {
       if (commands[name]) {
         await commands[name]({
           admin,
           args,
-          client: ircClient,
+          ircClient,
           from,
           loggedin,
           reply,

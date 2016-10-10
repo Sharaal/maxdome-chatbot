@@ -1,9 +1,9 @@
-import channels from './channels';
-import join from './join';
-import part from './part';
+import mxdChannels from './mxd-channels';
+import mxdJoin from './mxd-join';
+import mxdPart from './mxd-part';
 
-export default ({ channelsStorage }) => ({
-  channels: channels({ channelsStorage }),
-  join: join({ channelsStorage }),
-  part: part({ channelsStorage }),
+export default ({ channels }) => ({
+  'mxd-channels': mxdChannels({ channels }),
+  'mxd-join': mxdJoin({ channels }),
+  'mxd-part': mxdPart({ channels }),
 });

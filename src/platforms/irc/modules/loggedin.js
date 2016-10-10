@@ -1,5 +1,5 @@
-export default ({ client, from, translate }) => async () => new Promise((resolve, reject) => {
-  client.whois(from, (info) => {
+export default ({ ircClient, from, translate }) => async () => new Promise((resolve, reject) => {
+  ircClient.whois(from, (info) => {
     if (info.account) {
       const account = { id: info.account };
       resolve(account);

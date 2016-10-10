@@ -1,5 +1,5 @@
-export default ({ client, from, to }) => {
-  if (client.nick === to) {
+export default ({ ircClient, from, to }) => {
+  if (ircClient.nick === to) {
     return from;
   }
   return to;

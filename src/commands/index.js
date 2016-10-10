@@ -1,7 +1,7 @@
-import info from './info';
+import mxdInfo from './mxd-info';
 import mxdSearch from './mxd-search';
 
 export default ({ heimdall }) => ({
-  info,
+  'mxd-info': mxdInfo,
   'mxd-search': mxdSearch({ heimdall }),
 });
