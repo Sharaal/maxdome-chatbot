@@ -1,6 +1,14 @@
 [![Dependency Status](https://david-dm.org/dragonprojects/maxdome-chatbot.svg)](https://david-dm.org/dragonprojects/maxdome-chatbot)
 [![devDependency Status](https://david-dm.org/dragonprojects/maxdome-chatbot/dev-status.svg)](https://david-dm.org/dragonprojects/maxdome-chatbot?type=dev)
 
+# Commands
+
+* mxd-info
+* mxd-login
+* mxd-logout
+* mxd-search
+
+
 # Platforms
 
 ## Console
@@ -27,6 +35,12 @@ Environment variables:
 * IRC_USERNAME
 * PLATFORM=irc
 * REDIS_URL
+
+Commands:
+
+* mxd-channels
+* mxd-join
+* mxd-part
 
 ## Slack
 
