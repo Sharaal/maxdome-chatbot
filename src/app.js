@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
 import { Heimdall } from 'mxd-heimdall';
-import program from 'commander';
 import redis from 'redis';
 
 import frameworks from './frameworks';
