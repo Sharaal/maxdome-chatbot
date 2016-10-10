@@ -1,10 +1,16 @@
 import irc from 'irc';
 
+import _channelsStorage from './storages/channels';
 import ircCommands from './commands';
 import ircModules from './modules';
 
-export default ({ generalCommands, generalModules }) => {
-  const commands = Object.assign({}, generalCommands, ircCommands);
+export default ({ generalCommands, generalModules, redisClient }) => {
+  const channelsStorage = _channelsStorage({ client: redisClient });
+  const commands = Object.assign(
+    {},
+    generalCommands,
+    ircCommands({ channelsStorage })
+  );
   const modules = Object.assign({}, generalModules, ircModules);
 
   let options = {};
@@ -16,37 +22,45 @@ export default ({ generalCommands, generalModules }) => {
     });
   }
 
-  const client = new irc.Client(process.env.IRC_HOST, process.env.IRC_NICK, options);
+  const ircClient = new irc.Client(process.env.IRC_HOST, process.env.IRC_NICK, options);
 
-  client.addListener('registered', () => {
-    // const channels = await channelStorage.values();
-    const channels = ['#maxdome'];
+  ircClient.addListener('registered', async () => {
+    const channels = await channelsStorage.values();
     for (const channel of channels) {
-      client.join(channel);
+      ircClient.join(channel);
     }
     if (process.env.IRC_ADMIN_ID) {
-      client.say(process.env.IRC_ADMIN_ID, 'registered');
+      ircClient.say(process.env.IRC_ADMIN_ID, 'registered');
     }
   });
 
-  client.addListener('error', (message) => {
+  ircClient.addListener('error', (message) => {
     console.log('error: ', message);
   });
 
-  client.addListener('message', async (from, to, message) => {
-    const replyto = modules.replyto({ client, from, to });
+  ircClient.addListener('message', async (from, to, message) => {
+    const replyto = modules.replyto({ client: ircClient, from, to });
     const { name, args } = modules.command({ from, message, replyto });
     if (!name) {
       return;
     }
     const translate = modules.translate({ language: 'de' });
-    const loggedin = modules.loggedin({ client, from, translate });
+    const loggedin = modules.loggedin({ client: ircClient, from, translate });
     const admin = modules.admin({ loggedin, translate });
-    const reply = modules.reply({ client, from, replyto });
+    const reply = modules.reply({ client: ircClient, from, replyto });
 
     try {
       if (commands[name]) {
-        await commands[name]({ admin, args, loggedin, reply, translate });
+        await commands[name]({
+          admin,
+          args,
+          client: ircClient,
+          from,
+          loggedin,
+          reply,
+          replyto,
+          translate,
+        });
       } else {
         throw new Error(translate.text(
           "Unknown command '%s', available commands: %s",

@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { Heimdall } from 'mxd-heimdall';
 import program from 'commander';
+import redis from 'redis';
 
 import generalCommands from './commands';
 import generalModules from './modules';
@@ -21,10 +22,12 @@ if (platforms[platform]) {
     apikey: process.env.HEIMDALL_APIKEY,
     appid: process.env.HEIMDALL_APPID,
   });
+  const redisClient = redis.createClient(process.env.REDIS_URL);
   platforms[platform]({
     botbuilderConnector,
     generalCommands: generalCommands({ heimdall }),
     generalModules,
+    redisClient,
   });
 } else {
   throw new Error(`Unknown platform '${platform}', available platforms: ${Object.keys(platforms).join(', ')}`);
