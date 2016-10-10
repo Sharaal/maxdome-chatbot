@@ -6,26 +6,26 @@ import redis from 'redis';
 import generalCommands from './commands';
 import generalModules from './modules';
 import _generalStorages from './storages';
-import platforms from './platforms';
+import frameworks from './frameworks';
 
 dotenv.config({ silent: true });
 
 program
-  .option('-p, --platform [name]', 'Use the specified platform [botbuilder]', 'botbuilder')
+  .option('-p, --framework [name]', 'Use the specified framework [botbuilder]', 'botbuilder')
   .option('-b, --botbuilderConnector [name]', 'Use the specified connector of botbuilder [console]', 'console')
   .parse(process.argv);
 
-const platform = program.platform;
+const framework = program.framework;
 const botbuilderConnector = program.botbuilderConnector;
 
-if (platforms[platform]) {
+if (frameworks[framework]) {
   const heimdall = new Heimdall({
     apikey: process.env.HEIMDALL_APIKEY,
     appid: process.env.HEIMDALL_APPID,
   });
   const redisClient = redis.createClient(process.env.REDIS_URL);
   const generalStorages = _generalStorages({ redisClient });
-  platforms[platform]({
+  frameworks[framework]({
     botbuilderConnector,
     generalCommands: generalCommands({ heimdall, sessions: generalStorages.sessions }),
     generalModules: generalModules({ heimdall, sessions: generalStorages.sessions }),
@@ -33,5 +33,5 @@ if (platforms[platform]) {
     redisClient,
   });
 } else {
-  throw new Error(`Unknown platform '${platform}', available platforms: ${Object.keys(platforms).join(', ')}`);
+  throw new Error(`Unknown framework '${framework}', available frameworks: ${Object.keys(frameworks).join(', ')}`);
 }
