@@ -27,3 +27,15 @@ Environment variables:
 * IRC_USERNAME
 * PLATFORM=irc
 * REDIS_URL
+
+## Slack
+
+Process Type: web
+
+Environment variables:
+
+* HEIMDALL_APIKEY
+* HEIMDALL_APPID
+* PLATFORM=slack
+* REDIS_URL
+* PORT
