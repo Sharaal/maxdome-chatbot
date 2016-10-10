@@ -5,7 +5,7 @@ import redis from 'redis';
 
 import generalCommands from './commands';
 import generalModules from './modules';
-import generalStorages from './storages';
+import _generalStorages from './storages';
 import platforms from './platforms';
 
 dotenv.config({ silent: true });
@@ -24,11 +24,12 @@ if (platforms[platform]) {
     appid: process.env.HEIMDALL_APPID,
   });
   const redisClient = redis.createClient(process.env.REDIS_URL);
+  const generalStorages = _generalStorages({ redisClient });
   platforms[platform]({
     botbuilderConnector,
-    generalCommands: generalCommands({ heimdall }),
-    generalModules,
-    generalStorages: generalStorages({ redisClient }),
+    generalCommands: generalCommands({ heimdall, sessions: generalStorages.sessions }),
+    generalModules: generalModules({ heimdall, sessions: generalStorages.sessions }),
+    generalStorages,
     redisClient,
   });
 } else {

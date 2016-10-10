@@ -23,10 +23,11 @@ export default ({ botbuilderConnector, generalCommands, generalModules }) => {
     const loggedin = modules.loggedin({ session });
     const reply = modules.reply({ session });
     const translate = modules.translate({ language: 'de' });
+    const heimdallLoggedin = modules.heimdallLoggedin({ loggedin, translate });
 
     try {
       if (commands[name]) {
-        await commands[name]({ args, loggedin, reply, translate });
+        await commands[name]({ args, heimdallLoggedin, loggedin, reply, translate });
       } else {
         throw new Error(translate.text(
           "Unknown command '%s', available commands: %s",

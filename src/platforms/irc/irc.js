@@ -47,6 +47,7 @@ export default ({ generalCommands, generalModules, generalStorages, redisClient 
     const translate = modules.translate({ language: 'de' });
     const loggedin = modules.loggedin({ ircClient, from, translate });
     const admin = modules.admin({ loggedin, translate });
+    const heimdallLoggedin = modules.heimdallLoggedin({ loggedin, translate });
     const reply = modules.reply({ ircClient, from, replyto });
 
     try {
@@ -54,6 +55,7 @@ export default ({ generalCommands, generalModules, generalStorages, redisClient 
         await commands[name]({
           admin,
           args,
+          heimdallLoggedin,
           ircClient,
           from,
           loggedin,
