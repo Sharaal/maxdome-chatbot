@@ -16,10 +16,10 @@
   "readmeFilename": "README.md",
   "scripts": {
     "build": "babel src -d dest",
-    "develop": "nodemon src/cli.js --exec babel-node",
+    "develop": "nodemon src/app.js --exec babel-node",
     "lint": "eslint src",
     "postinstall": "npm run build",
-    "start": "node dest/cli.js"
+    "start": "node dest/app.js"
   },
   "dependencies": {
     "babel-cli": "^6.7.5",
@@ -27,7 +27,6 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.16.0",
     "babel-plugin-transform-strict-mode": "^6.11.3",
     "botbuilder": "^3.2.3",
-    "commander": "^2.9.0",
     "dotenv": "^2.0.0",
     "irc": "^0.5.0",
     "mxd-heimdall": "^2.2.0",
