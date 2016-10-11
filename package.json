@@ -2,7 +2,7 @@
   "private": true,
   "name": "maxdome-chatbot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Search for assets and manage your maxdome account with a chatbot",
   "homepage": "http://github.com/dragonprojects/maxdome-chatbot",
   "author": {
     "name": "Sharaal",
