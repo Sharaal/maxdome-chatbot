@@ -21,7 +21,7 @@ export default ({ heimdall }) => async ({ args, reply, translate }) => {
       link: `https://${hostname}/suche?search=${encodeURIComponent(args)}`,
     });
     reply.send(
-      translate.text("Results found for '%s'...", args),
+      translate.text("Results found for '%s'", args),
       attachments
     );
   } else {

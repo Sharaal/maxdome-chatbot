@@ -1,10 +1,12 @@
+function link(url, label) {
+  if (label) {
+    return `${label} (${url})`;
+  }
+  return url;
+}
+
 export default ({ ircClient, from, replyto }) => ({
-  link: (url, label) => {
-    if (label) {
-      return `${label} (${url})`;
-    }
-    return url;
-  },
+  link,
   send: (text, attachments) => {
     let lines;
     if (Array.isArray(text)) {
@@ -14,7 +16,7 @@ export default ({ ircClient, from, replyto }) => ({
     }
     if (attachments) {
       lines = lines.concat(attachments.map(
-        attachment => this.link(attachment.link, attachment.title)
+        attachment => link(attachment.link, attachment.title)
       ));
     }
     let line = lines.join(', ');
