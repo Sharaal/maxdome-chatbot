@@ -8,6 +8,7 @@ export default {
   'Logout sucessful': 'Abmeldung erfolgreich',
   'No channels joined': 'Keine Channels betreten',
   "No results found for '%s'": "Keine Ergebnisse gefunden für '%s'",
+  "Results found for '%s'...": "Ergebnisse gefunden für '%s'...",
   'Show all results...': 'Zeige alle Ergebnisse...',
   "Unknown command '%s', available commands: %s": "Unbekanntes Kommando '%s', verfügbare Kommandos: '%s'",
   'You are not authorized for the command': 'Du bist nicht authorisiert für dieses Kommando',

@@ -16,8 +16,12 @@ export default ({ heimdall }) => async ({ args, reply, translate }) => {
       text: asset.description,
       link: `https://${hostname}/${asset.id}`,
     }));
+    attachments.push({
+      title: translate.text('Show all results...'),
+      link: `https://${hostname}/suche?search=${encodeURIComponent(args)}`,
+    });
     reply.send(
-      reply.link(`https://${hostname}/suche?search=${encodeURIComponent(args)}`, translate.text('Show all results...')),
+      translate.text("Results found for '%s'..."),
       attachments
     );
   } else {
