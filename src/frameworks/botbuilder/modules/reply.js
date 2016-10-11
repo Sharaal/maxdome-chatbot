@@ -21,13 +21,13 @@ export default ({ session }) => ({
           .textFormat(builder.TextFormat.xml)
           .attachments(attachments.map(
             attachment => {
-              const heroCard = new builder.HeroCard(session)
+              let heroCard = new builder.HeroCard(session)
                 .title(attachment.title)
                 .text(attachment.text)
                 .tap(builder.CardAction.openUrl(session, attachment.link));
               attachment.image = 'https://01.static-maxdome.de/getAssetImage/objId:16599117/type:poster/width:138/height:200/imageId:17253442.jpg';
               if (attachment.image) {
-                heroCard.images([
+                heroCard = heroCard.images([
                   builder.CardImage.create(session, attachment.image)
                 ]);
               }
