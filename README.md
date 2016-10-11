@@ -11,6 +11,22 @@
 
 # Platforms
 
+## Botframework
+
+http://dev.botframework.com
+
+Process Type: web
+
+Environment variables:
+
+* HEIMDALL_APIKEY
+* HEIMDALL_APPID
+* MICROSOFT_APP_ID
+* MICROSOFT_APP_PASSWORD
+* PLATFORM=botframework
+* PORT
+* REDIS_URL
+
 ## Console
 
 Environment variables:
@@ -51,5 +67,5 @@ Environment variables:
 * HEIMDALL_APIKEY
 * HEIMDALL_APPID
 * PLATFORM=slack
-* REDIS_URL
 * PORT
+* REDIS_URL
