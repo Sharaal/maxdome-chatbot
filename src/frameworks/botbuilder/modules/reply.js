@@ -1,3 +1,5 @@
+import builder from 'botbuilder';
+
 export default ({ session }) => ({
   link: (url, label) => {
     if (label) {
@@ -12,9 +14,18 @@ export default ({ session }) => ({
     } else {
       lines = [text];
     }
-    if (attachments) {
-      lines = lines.concat(attachments.map(attachment => attachment.title));
-    }
     session.send(lines.join(', '));
+    if (attachments) {
+      const message =
+        new builder.Message(session)
+          .textFormat(builder.TextFormat.xml)
+          .attachments(attachments.map(
+            attachment =>
+              new builder.HeroCard(session)
+                .title(attachment.title)
+                .text(attachment.text)
+          ));
+      session.send(message);
+    }
   },
 });
