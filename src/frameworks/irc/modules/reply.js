@@ -13,7 +13,9 @@ export default ({ ircClient, from, replyto }) => ({
       lines = [text];
     }
     if (attachments) {
-      lines = lines.concat(attachments.map(attachment => attachment.title));
+      lines = lines.concat(attachments.map(
+        attachment => this.link(attachment.link, attachment.title)
+      ));
     }
     let line = lines.join(', ');
     if (replyto !== from) {

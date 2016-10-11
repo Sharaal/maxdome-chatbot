@@ -12,6 +12,16 @@ export default ({ res }) => ({
     } else {
       lines = [text];
     }
-    res.send({ response_type: 'in_channel', text: lines.join(', '), attachments });
+    res.send({
+      response_type: 'in_channel',
+      text: lines.join(', '),
+      attachments: attachments.map(
+        attachment => ({
+          title: attachment.title,
+          title_link: attachment.link,
+          text: attachment.text,
+        })
+      ),
+    });
   },
 });
