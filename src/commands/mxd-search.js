@@ -14,6 +14,7 @@ export default ({ heimdall }) => async ({ args, reply, translate }) => {
     const attachments = assets.map(asset => ({
       title: asset.title,
       text: asset.description,
+      image: asset.image,
       link: `https://${hostname}/${asset.id}`,
     }));
     attachments.push({
