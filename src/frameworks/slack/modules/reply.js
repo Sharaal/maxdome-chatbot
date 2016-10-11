@@ -20,6 +20,7 @@ export default ({ res }) => ({
           title: attachment.title,
           title_link: attachment.link,
           text: attachment.text,
+          image_url: attachment.image,
         })
       ),
     });
