@@ -8,7 +8,7 @@ export default ({ generalCommands, generalModules }) => {
 
   const server = restify.createServer();
 
-  server.post('/webhook', async (req, res) => {
+  server.post('/api', async (req, res) => {
     const { name, args } = modules.command({ req });
     const translate = modules.translate({ language: 'de' });
     const loggedin = modules.loggedin({ req });

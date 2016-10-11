@@ -11,11 +11,11 @@
 
 # Platforms
 
-## Botframework
-
-http://dev.botframework.com
+## Botframework (http://dev.botframework.com)
 
 Process Type: web
+
+Endpoint: /api
 
 Environment variables:
 
@@ -61,6 +61,8 @@ Commands:
 ## Slack
 
 Process Type: web
+
+Endpoint: /api
 
 Environment variables:
 

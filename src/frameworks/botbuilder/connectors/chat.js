@@ -8,6 +8,6 @@ export default () => {
     appId: process.env.MICROSOFT_APP_ID,
     appPassword: process.env.MICROSOFT_APP_PASSWORD,
   });
-  server.post('/api/messages', connector.listen());
+  server.post('/api', connector.listen());
   return connector;
 };
