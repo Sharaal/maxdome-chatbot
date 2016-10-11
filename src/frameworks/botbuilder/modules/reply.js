@@ -24,7 +24,7 @@ export default ({ session }) => ({
               new builder.HeroCard(session)
                 .title(attachment.title)
                 .text(attachment.text)
-                .tab(builder.CardAction.openUrl(session, attachment.link))
+                .tap(builder.CardAction.openUrl(session, attachment.link))
           ));
       session.send(message);
     }
