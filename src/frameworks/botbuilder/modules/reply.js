@@ -20,14 +20,14 @@ export default ({ session }) => ({
         new builder.Message(session)
           .textFormat(builder.TextFormat.xml)
           .attachments(attachments.map(
-            attachment => {
-              let heroCard = new builder.HeroCard(session)
+            (attachment) => {
+              const heroCard = new builder.HeroCard(session)
                 .title(attachment.title)
                 .text(attachment.text)
                 .tap(builder.CardAction.openUrl(session, attachment.link));
               if (attachment.image) {
                 heroCard.images([
-                  builder.CardImage.create(session, attachment.image)
+                  builder.CardImage.create(session, attachment.image),
                 ]);
               }
               return heroCard;
